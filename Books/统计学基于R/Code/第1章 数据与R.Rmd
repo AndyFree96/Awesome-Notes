@@ -1,0 +1,134 @@
+---
+title: "第1章 数据与R"
+output: html_notebook
+---
+
+# 数据与统计学
+
+**统计学**（statistics）是一门分析数据的科学，它所提供的是收集数据、处理数据和分析数据的一套方法和技术，通过对数据的分析得出结论。 
+
+# R的初步使用
+
+## 对象赋值与运行
+
+```{r}
+x <- 8
+y <- c(80, 87, 98, 73, 100)
+
+sum(y)
+
+mean(y)
+
+var(y)
+
+barplot(y, xlab = "类别", ylab = "数量", col = c(1:5), family="Kai")
+```
+## 查看帮助文件
+
+```{r}
+help("mean")
+
+help(package="stats")
+```
+
+## 包的安装与加载
+
+```{r message=FALSE, warning=FALSE}
+# 安装包
+install.packages("car")
+
+install.packages(c("car", "vcd"))
+
+# 加载包
+library(car)
+
+require(car)
+```
+
+
+# 创建R数据
+
+## 在R中录入数据
+
+```{r}
+names <- c("Candy", "Bob", "Lucy", "Peter")
+stat <- c(78, 67, 75, 87)
+math <- c(76, 76, 78, 98)
+mark <- c(32, 45, 58, 86)
+mana <- c(54, 49, 76, 85)
+acco <- c(32, 43, 53, 23)
+
+# 数据框形式
+table <- data.frame(姓名=names,统计学=stat,营销学=mark,管理学=mana,会计学=acco, 数学=math)
+
+# 矩阵形式
+matrix_1 <- matrix(cbind(stat, math, mark, mana, acco), ncol = 5)
+dimnames(matrix_1) <- list(names, c("统计学", "数学", "营销学", "管理学", "会计学"))
+
+save(matrix_1, file="./matrix_1.RData")
+```
+
+## 数据读取和保存
+
+```{r}
+# 读取R格式数据
+load("../example/ch1/table1_1_1.RData")
+
+# 读取CSV格式数据
+read.csv("../example/ch1/table1_1.csv", header = FALSE)
+
+# 导入Excel数据
+install.packages("xlsx")
+library(xlsx)
+table1_1 <- read.xlsx("../example/ch1/table1_1.xlsx", as.data.frame=TRUE)
+
+head(table, 2)
+
+tail(table, 2)
+
+str(table)
+```
+
+## 数据使用和编辑
+
+```{r}
+newdata <- table[order(table$姓名), ]
+
+newdata1 <- table[order(table$统计学, decreasing = TRUE), ]
+
+mean(table$营销学)
+
+mean(table[,2])
+
+colSums(matrix_1)
+
+rbind(matrix_1, totals=colSums(matrix_1))
+
+rowSums(matrix_1)
+
+cbind(matrix_1, totals=rowSums(matrix_1))
+
+apply(matrix_1, 1, sum)
+
+apply(matrix_1, 2, sum)
+
+apply(matrix_1, 1, mean)
+
+apply(matrix_1, 2, mean)
+
+apply(matrix_1, 2, sd)
+
+rnorm(10)
+
+set.seed(15)
+rnorm(10, 50, 5)
+
+runif(10, 0, 100)
+
+rexp(10)
+
+rchisq(10, 15)
+
+sample(table$姓名, 3, replace = FALSE)
+```
+
