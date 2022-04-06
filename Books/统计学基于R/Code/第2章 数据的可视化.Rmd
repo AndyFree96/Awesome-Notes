@@ -1,0 +1,55 @@
+---
+title: "第2章 数据的可视化"
+output: html_notebook
+---
+
+# 数据的频数分布
+
+## 类别数据
+
+```{r}
+load("../example/ch2/example2_1.RData")
+
+colnames(example2_1) <-
+iconv(colnames(example2_1), from = "GBK", to = "UTF-8")
+example2_1 <- as.data.frame(lapply(example2_1, function(x) iconv(x, from = "GBK", to = "UTF-8")))
+
+example2_1
+
+count1 <- table(example2_1$社区)
+
+prop.table(count1) * 100
+
+count2 <- table(example2_1$性别)
+
+prop.table(count2) * 100
+
+count3 <- table(example2_1$态度)
+
+prop.table(count3) * 100
+
+table1 <- table(example2_1$社区, example2_1$性别)
+
+addmargins(prop.table(table1)) * 100
+
+table2 <- table(example2_1$社区, example2_1$态度)
+
+addmargins(prop.table(table2)) * 100
+
+table3 <- table(example2_1$性别, example2_1$态度)
+
+addmargins(prop.table(table3)) * 100
+
+library(gmodels)
+
+CrossTable(example2_1$性别, example2_1$态度)
+
+ftable(example2_1)
+
+ftable(example2_1, row.vars = c("性别", "态度"),col.vars = "社区" )
+
+ftable(addmargins(table(example2_1$社区,example2_1$性别,example2_1$态度)))
+
+ftable(addmargins(prop.table(table(example2_1$社区,example2_1$性别,example2_1$态度))) * 100)
+```
+
