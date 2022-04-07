@@ -56,8 +56,44 @@ ftable(addmargins(prop.table(table(example2_1$社区,example2_1$性别,example2_
 ## 数值数据
 
 ```{r}
-load("../example/ch2/example2_2.RData")
+load("../example/ch2/example2_2.RData") 
 
-example2_2
+
+colnames(example2_2) <-
+iconv(colnames(example2_2), from = "GBK", to = "UTF-8")
+
+vector2_2 <- as.vector(example2_2$销售额)
+library(plyr)
+count <- table(round_any(vector2_2, 10, floor))
+count <- as.numeric(count)
+pcount <- prop.table(count) * 100
+cumsump <- cumsum(pcount)
+name <- paste(seq(160, 270,by=10),"-",seq(170,280,by=10),sep = "")
+gt <- data.frame("频数"=count, "百分比"=pcount,"累积百分比"=cumsump,row.names = name)
+
+d <- table(cut(vector2_2, breaks = 10 * (16:28), right = FALSE))
+df <- data.frame(d)
+percent <- df$Freq/sum(df$Freq) * 100
+cumsump <- cumsum(percent)
+mytable <- data.frame(d, percent, cumsump)
+```
+
+
+# 类别数据的可视化
+
+```{r}
+load("../example/ch2/example2_1.RData")
+
+colnames(example2_1) <-
+iconv(colnames(example2_1), from = "GBK", to = "UTF-8")
+example2_1 <- as.data.frame(lapply(example2_1, function(x) iconv(x, from = "GBK", to = "UTF-8")))
+count1 <- table(example2_1$社区)
+count2 <- table(example2_1$性别)
+count3 <- table(example2_1$态度)
+
+par(mfrow=c(1,3),mai=c(0.7,0.7,0.6,0.1),cex=0.7,cex.main=0.8)
+barplot(count1,xlab = "频数",ylab = "社区",horiz = TRUE,main = "(a)水平条形图",col = 2:5, family="Kai")
+barplot(count2,xlab = "性别",ylab = "频数", main = "(b)垂直条形图",family="Kai")
+barplot(count3,xlab = "态度",ylab = "频数", main = "(c)垂直条形图",family="Kai")
 ```
 
