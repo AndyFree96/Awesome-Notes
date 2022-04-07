@@ -53,3 +53,11 @@ ftable(addmargins(table(example2_1$社区,example2_1$性别,example2_1$态度)))
 ftable(addmargins(prop.table(table(example2_1$社区,example2_1$性别,example2_1$态度))) * 100)
 ```
 
+## 数值数据
+
+```{r}
+load("../example/ch2/example2_2.RData")
+
+example2_2
+```
+
