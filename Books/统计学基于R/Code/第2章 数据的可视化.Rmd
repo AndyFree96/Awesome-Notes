@@ -95,5 +95,16 @@ par(mfrow=c(1,3),mai=c(0.7,0.7,0.6,0.1),cex=0.7,cex.main=0.8)
 barplot(count1,xlab = "频数",ylab = "社区",horiz = TRUE,main = "(a)水平条形图",col = 2:5, family="Kai")
 barplot(count2,xlab = "性别",ylab = "频数", main = "(b)垂直条形图",family="Kai")
 barplot(count3,xlab = "态度",ylab = "频数", main = "(c)垂直条形图",family="Kai")
+
+
+x <- sort(count1, decreasing = T)
+par(mai=c(0.7,0.7,0.1,0.8),cex=0.7,cex=0.8)
+bar <- barplot(x, xlab = "社区", ylab = "频数", ylim = c(0, 1.2 * max(count1)), col = 2:5, family="Kai")
+text(bar, x, labels=x, pos = 3)
+y <- cumsum(x) / sum(x)
+par(new=T)
+plot(y, type="b", lwd=1.5, pch=15, axes=FALSE, xlab="", ylab="", main="")
+axis(4)
+mtext("累积频率", side = 4, line = 3, family="Kai")
 ```
 
