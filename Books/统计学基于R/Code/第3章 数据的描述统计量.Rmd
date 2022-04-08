@@ -1,0 +1,39 @@
+---
+title: "第3章 数据的描述统计量"
+output: html_notebook
+---
+
+# 描述水平的统计量
+
+```{r}
+load("../example/ch3/example3_1.RData")
+
+colnames(example3_1) <- iconv(colnames(example3_1), from = "GBK", to = "UTF-8")
+
+mean(example3_1$分数)
+
+load("../example/ch3/example3_2.RData")
+
+colnames(example3_2) <- iconv(colnames(example3_2), from = "GBK", to = "UTF-8")
+
+example3_2 <- as.data.frame(lapply(example3_2, function(x) iconv(x, from = "GBK", to = "UTF-8")))
+
+example3_2$组中值 <- as.numeric(example3_2$组中值)
+example3_2$人数 <- as.numeric(example3_2$人数)
+weighted.mean(example3_2$组中值, example3_2$人数)
+
+median(example3_1$分数)
+
+quantile(example3_1$分数, probs = c(0.25, 0.75), type = 6)
+
+quantile(example3_1$分数, probs = 0.1 * c(1:9), type = 6)
+
+max(example3_1$分数) - min(example3_1$分数)
+
+IQR(example3_1$分数, type = 6)
+
+var(example3_1$分数)
+
+sd(example3_1$分数)
+```
+
