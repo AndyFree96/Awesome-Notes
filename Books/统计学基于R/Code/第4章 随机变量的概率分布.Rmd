@@ -1,0 +1,22 @@
+---
+title: "第4章 随机变量的概率分布"
+output: html_notebook
+---
+
+```{r}
+load("../example/ch4/example4_1.RData")
+
+colnames(example4_1) <- iconv(colnames(example4_1), from = "GBK", to = "UTF-8")
+
+mymean <- sum(example4_1$不合格品数 * example4_1$概率)
+
+mymean
+
+myvar <- sum((example4_1$不合格品数 - mymean) ^ 2 * example4_1$概率)
+
+myvar
+
+sqrt(myvar)
+```
+
+
