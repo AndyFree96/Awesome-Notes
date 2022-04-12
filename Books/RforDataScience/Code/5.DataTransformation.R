@@ -48,7 +48,7 @@ filter(df, x > 1)
 
 filter(df, is.na(x) | x > 1)
 
-# 5.2.4 Exercise
+# 5.2.4 Exercises
 # 1.1
 filter(flights,arr_delay >= 120)
 
@@ -87,7 +87,36 @@ FALSE & NA
 
 NA * 0
 
+# arrange函数给行排序
+arrange(flights, year, month, day)
 
+arrange(flights, desc(dep_delay))
 
+df <- tibble(x = c(5, 2, NA))
 
+df
 
+arrange(df, x)
+
+arrange(df, desc(x))
+
+# 5.3.1 Exercises
+# 1
+arrange(df, !is.na(x))
+
+# 2
+arrange(flights, desc(dep_delay))
+
+arrange(flights, dep_delay)
+
+# 3
+arrange(flights, desc(distance / air_time))
+
+# 4
+arrange(flights, desc(distance))
+
+arrange(flights, distance)
+
+arrange(flights, desc(air_time))
+
+arrange(flights, air_time)
