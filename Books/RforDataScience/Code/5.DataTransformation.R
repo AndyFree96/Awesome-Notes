@@ -120,3 +120,35 @@ arrange(flights, distance)
 arrange(flights, desc(air_time))
 
 arrange(flights, air_time)
+
+# select函数选择列
+select(flights, year, month, day)
+
+select(flights, year:day)
+
+select(flights, -(year:day))
+
+rename(flights, tail_num=tailnum)
+
+select(flights, starts_with("t"))
+
+select(flights, ends_with("r"))
+
+select(flights, time_hour, air_time, everything())
+
+# 5.4.1 Exercises
+# 1
+select(flights, dep_time, dep_delay, arr_time, arr_delay)
+
+# 2
+select(flights, dep_time, dep_time)
+
+# 3
+vars <- c("year", "month", "day","dep_delay", "arr_delay")
+select(flights, any_of(vars))
+
+# 4
+select(flights, contains("TIME"))
+
+select(flights, contains("TIME", ignore.case = FALSE))
+
