@@ -244,3 +244,44 @@ sin(1:3)
 cos(1:3)
 
 tan(1:3)
+
+# 使用summarize函数进行分组摘要
+summarize(flights, delay=mean(dep_delay, na.rm=TRUE))
+
+by_day <- group_by(flights, year, month, day)
+summarize(by_day, delay = mean(dep_delay, na.rm=TRUE))
+
+## 使用管道组合多种操作
+delays <- flights %>% 
+  group_by(dest) %>%
+  summarize(
+    count = n(),
+    dist=mean(distance, na.rm=TRUE),
+    delay=mean(arr_delay, na.rm=TRUE)
+  ) %>% filter(count > 20, dest != "HNL")
+
+delays
+
+## 缺失值
+flights %>%
+  group_by(year, month, day) %>%
+  summarize(mean=mean(dep_delay, na.rm=TRUE))
+
+flights %>% filter(!is.na(dep_delay), !is.na(arr_delay)) %>%
+  group_by(year, month, day) %>%
+  summarize(mean=mean(dep_delay))
+
+batting <- as_tibble(Lahman::Batting)
+
+batters <- batting %>%
+  group_by(playerID) %>%
+  summarize(ba=sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+            ab=sum(AB, na.rm = TRUE)
+            )
+batters %>% filter(ab > 100) %>%
+  ggplot(mapping = aes(x = ab, y = ba)) +
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+batters %>% 
+  arrange(desc(ba))
