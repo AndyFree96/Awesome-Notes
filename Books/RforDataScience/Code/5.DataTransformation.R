@@ -285,3 +285,32 @@ batters %>% filter(ab > 100) %>%
 
 batters %>% 
   arrange(desc(ba))
+
+not_cancelled <- flights %>% 
+  filter(!is.na(dep_delay), !is.na(arr_delay))
+
+## 常用的摘要函数
+not_cancelled %>% 
+  group_by(year, month, day) %>%
+  summarize(
+    avg_delay1=mean(arr_delay),
+    avg_delay2=mean(arr_delay[arr_delay > 0])
+  )
+
+not_cancelled %>%
+  count(dest)
+
+not_cancelled %>%
+  count(tailnum, wt=distance)
+
+## 按多个变量分组
+daily <- group_by(flights, year, month, day)
+(per_day <- summarize(daily, flights=n()))
+
+(per_month <- summarize(per_day, flights=sum(flights)))
+
+(per_year <- summarise(per_month, flights=sum(flights)))
+
+## 取消分组
+daily %>% ungroup() %>%
+  summarise(flights=n())
