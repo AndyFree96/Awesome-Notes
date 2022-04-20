@@ -1,0 +1,1 @@
+Introduction to C Memory Managment and C++ Object-Oriented Programming: https://ocw.mit.edu/courses/6-088-introduction-to-c-memory-management-and-c-object-oriented-programming-january-iap-2010
