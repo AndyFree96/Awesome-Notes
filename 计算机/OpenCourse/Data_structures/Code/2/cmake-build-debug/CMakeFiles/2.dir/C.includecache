@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ironanthony/Desktop/Projects/Awesome-Notes/计算机/OpenCourse/Data_structures/Code/2/main.c
+stdio.h
+-
+
