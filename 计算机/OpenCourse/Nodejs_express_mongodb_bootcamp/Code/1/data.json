@@ -1,10 +1,22 @@
 [
     {
         "id": 1,
-        "name": "peter"
+        "productName": "A",
+        "description": "item A",
+        "image": "",
+        "price": 3.5,
+        "from": "ABC",
+        "quantity": "Good",
+        "organic": false
     },
     {
-        "id":2,
-        "name": "andy"
+        "id": 2,
+        "productName": "B",
+        "description": "item B",
+        "image": "",
+        "price": 12.3,
+        "from": "BCD",
+        "quantity": "Not bad",
+        "organic": true
     }
 ]
