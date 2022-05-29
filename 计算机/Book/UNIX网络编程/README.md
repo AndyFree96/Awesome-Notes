@@ -172,7 +172,7 @@ main(int argc, char **argv)
 
 ### 说明
 
-`sockaddr_in`的结构为:
+#### `sockaddr_in`
 
 ```C
 struct sockaddr_in {
@@ -228,7 +228,7 @@ struct sockaddr {
 
 What does `__SOCKADDR_COMMON (sin_)` mean?: https://stackoverflow.com/questions/34539564/what-does-sockaddr-common-sin-mean
 
-`err_quit`函数的定义及作用为:
+#### `err_quit`
 
 附录D.3 标准错误处理函数介绍了5个标准错误处理函数，该函数定义在项目源码下`lib/error.c`文件:
 
@@ -248,7 +248,7 @@ error_quit(const char *fmt, ...)
 
 Variable Length Argument in C: https://www.geeksforgeeks.org/variable-length-argument-c/
 
-`err_sys`函数的定义及作用为:
+#### `err_sys`
 
 定义在`lib/error.c`中:
 
@@ -265,7 +265,7 @@ void error_sys(const char *fmt, ...)
 
 
 
-`bzero`函数的定义及作用为:
+#### `bzero`
 
 在`/usr/include/unp.h`(准备时复制过去的)中定义:
 
@@ -275,7 +275,7 @@ void error_sys(const char *fmt, ...)
 
 memset: https://linux.die.net/man/3/memset
 
-`AF_INET`的定义为:
+#### `AF_INET`
 
 在`/usr/include/bits/socket.h`中定义:
 
@@ -292,7 +292,7 @@ memset: https://linux.die.net/man/3/memset
 
 
 
-`SOCK_STREAM`的定义为:
+#### `SOCK_STREAM`
 
 ```C
 #define SOCK_STREAM 1 /* stream (connection) socket */
@@ -304,7 +304,7 @@ https://students.mimuw.edu.pl/SO/Linux/Kod/include/linux/socket.h.html
 
 
 
-`htons`函数的定义及作用为:
+#### `htons`
 
 ```C
 unit16_t htons(uint16_t hostshort);
@@ -316,7 +316,7 @@ htons() function in socket programming: https://stackoverflow.com/questions/1920
 
 htons(): https://www.qnx.com/developers/docs/7.1/#com.qnx.doc.neutrino.lib_ref/topic/h/htons.html
 
-`inet_pton`函数的定义及作用为:
+#### `inet_pton`
 
 ```C
 int inet_pton(int af, const char *restrict src, void *restrict dst);
@@ -326,7 +326,7 @@ Convert IPv4 and Ipv6 addresses from text to binary from.
 
 inet_pton: https://man7.org/linux/man-pages/man3/inet_pton.3.html
 
-`connect`函数的定义及作用为:
+#### `connect`
 
 ```C
 int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
@@ -336,7 +336,7 @@ Initiate a connection on a socket.
 
 connect: https://man7.org/linux/man-pages/man2/connect.2.html
 
-`read`函数的定义及作用为:
+#### `read`
 
 ```C
 ssize_t read(int fd, void *buf, size_t count);
@@ -344,7 +344,7 @@ ssize_t read(int fd, void *buf, size_t count);
 
 Read from a file descriptor.
 
-`fputs`函数的定义及作用为:
+#### `fputs`
 
 ```C
 int fputs(const char *restrict s, FILE *restrict stream);
