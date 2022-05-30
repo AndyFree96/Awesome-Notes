@@ -1,6 +1,6 @@
 # 准备工作
 
-系统环境为: Ubuntu 18.04.4 LTS
+系统环境为: Ubuntu 18.04.4 LTS x86_64(腾讯云主机) 以及 Ubuntu 20.04.4 LTS aarch64(Parallel Desktop虚拟机)
 
 源码地址: https://github.com/hailinzeng/Unix-Network-Programming
 
@@ -9,6 +9,10 @@
 2. `cd Unix-Network-Programming`进入到源码项目目录
 
 3. 执行`./configure`，主要工作是检查系统是否有源码编译所依赖的各种资源，例如: 系统版本是否匹配、编译器、库文件、头文件等等。若无法执行，可以使用`sudo chmod +x configure`更改权限再执行
+
+遇到`cannot guess build type`错误，可参考:
+
+How to resolve configure guessing build type failure?: https://stackoverflow.com/questions/4810996/how-to-resolve-configure-guessing-build-type-failure
 
 4. `cd lib`进入 lib 目录，然后执行`make`命令编译基础库，得到 libudp.a 静态库文件
 
@@ -355,6 +359,48 @@ Put a string on a stream.
 fputs: https://man7.org/linux/man-pages/man3/fputs.3p.html
 
 What does 'stream' mean in C?: https://stackoverflow.com/questions/38652953/what-does-stream-mean-in-c
+
+
+
+## 一个简单的时间获取服务器程序
+
+源文件`intro/daytimecpcsrv.c`:
+
+```C
+
+#include	"unp.h"
+#include	<time.h>
+
+int
+main(int argc, char **argv)
+{
+	int					listenfd, connfd;
+	struct sockaddr_in	servaddr;
+	char				buff[MAXLINE];
+	time_t				ticks;
+
+	listenfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+	bzero(&servaddr, sizeof(servaddr));
+	servaddr.sin_family      = AF_INET;
+	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	servaddr.sin_port        = htons(13);	/* daytime server */
+
+	Bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
+
+	Listen(listenfd, LISTENQ);
+
+	for ( ; ; ) {
+		connfd = Accept(listenfd, (SA *) NULL, NULL);
+
+        ticks = time(NULL);
+        snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
+        Write(connfd, buff, strlen(buff));
+
+		Close(connfd);
+	}
+}
+```
 
 # 推荐
 
